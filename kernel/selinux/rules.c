@@ -139,9 +139,6 @@ void ksu_apply_kernelsu_rules()
 	ksu_allow(db, "system_server", KERNEL_SU_DOMAIN, "process", "getpgid");
 	ksu_allow(db, "system_server", KERNEL_SU_DOMAIN, "process", "sigkill");
 
-<<<<<<< HEAD
-	mutex_unlock(&ksu_rules);
-=======
 #ifdef CONFIG_KSU_SUSFS
 	// Allow umount in zygote process without installing zygisk
 	ksu_allow(db, "zygote", "labeledfs", "filesystem", "unmount");
@@ -150,8 +147,7 @@ void ksu_apply_kernelsu_rules()
 	susfs_set_zygote_sid();
 #endif
 
-	rcu_read_unlock();
->>>>>>> 0a7d9910 (kernel: implement susfs v1.5.9)
+	mutex_unlock(&ksu_rules);
 }
 
 #define MAX_SEPOL_LEN 128
